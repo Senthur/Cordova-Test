@@ -87,10 +87,12 @@ h1 {
     padding:2px 0px;
 }
 
-.status {
-	margin-top: 5px;
-	margin-bottom: 5px;
+.log {
+	padding:5px;
     background-color:#4B946A;
+    height: 100px;
+    overflow-y: scroll;
+    text-align: left;
 }
 
 @keyframes fade {

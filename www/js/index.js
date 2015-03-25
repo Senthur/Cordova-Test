@@ -24,16 +24,32 @@ var app = {
 		document.addEventListener('deviceready', this.onDeviceReady, false);
 	},
 	onDeviceReady : function() {
-		$(".status").text("Device is Ready");
-		console.log('Received Event: ' + id);
-		db.initialize();
+		log.append("Device is Ready");
+		// console.log('Received Event: ' + id);
+		sqlite.initialize();
 	},
 };
 
-var db = {
+var sqlite = {
 	initialize : function() {
-		
+		log.append("Initializing SQLite");
+		try {
+			var db = window.sqlitePlugin.openDatabase({
+				name : "my.db"
+			});
+			log.append("Connected to SQLite");
+		} catch (ex) {
+			log.append("Error connecting to SQLite");
+		}
 	}
 };
+
+var log = {
+	append : function(txt) {
+		$(".log").append($("<p>", {
+			text : txt
+		}));
+	}
+}
 
 app.initialize();
