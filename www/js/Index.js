@@ -24,31 +24,21 @@ var app = {
 		document.addEventListener('deviceready', this.onDeviceReady, false);
 	},
 	onDeviceReady : function() {
-		log.append("Device is Ready");
-		// console.log('Received Event: ' + id);
+		logger.notify("Device is Ready");
 		sqlite.initialize();
-	},
-};
-
-var sqlite = {
-	initialize : function() {
-		log.append("Initializing SQLite");
-		try {
-			var db = window.sqlitePlugin.openDatabase({
-				name : "my.db"
-			});
-			log.append("Connected to SQLite");
-		} catch (ex) {
-			log.append("Error connecting to SQLite");
-		}
+		logger.notify("SQLite init complete");
 	}
 };
 
-var log = {
-	append : function(txt) {
+var logger = {
+	notify : function(txt) {
 		$(".log").append($("<p>", {
 			text : txt
 		}));
+		logger.debug(txt);
+	},
+	debug : function(txt) {
+		console.log("[CORDOVA-TEST]" + txt);
 	}
 }
 
